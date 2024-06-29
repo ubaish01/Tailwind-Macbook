@@ -14,6 +14,8 @@ import right from "../assets/keys/right.svg";
 import down from "../assets/keys/down.svg";
 import command from "../assets/keys/command.svg";
 import screenshot from "../assets/images/macbook.png";
+import { useEffect, useRef, useState } from "react";
+import clsx from "clsx";
 
 const Macbook = () => {
   return (
@@ -25,23 +27,53 @@ const Macbook = () => {
 };
 
 const Screen = () => {
+  const screenshotRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const screenHeight = window.innerHeight;
+      const moveDown = Math.min(scrollPosition, screenHeight);
+
+      if (screenshotRef.current) {
+        if (scrollPosition > 0) {
+          screenshotRef.current.style.transform = `translateY(${moveDown}px) rotateX(0deg)`;
+        } else {
+          screenshotRef.current.style.transform =
+            "translateY(0) rotateX(-35deg)";
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="w-full">
+    <div className="w-full z-20">
       <div className="outer-screen w-full h-80 mb-[-38px]">
         <div className=" screen  bg-black border-4 overflow-hidden border-b-0 rounded-xl border-[#171717]"></div>
       </div>
-      {/* 
-      <img
-        className="w-[32rem] aspect-auto h-80 absolute top-0 left-0  object-cover"
-        src={screenshot}
-        alt=""
-      /> */}
+
+      <div className="ss-outer ">
+        <img
+          ref={screenshotRef}
+          className={clsx(
+            "w-[37rem] z-50 ss aspect-auto h-72 absolute top-[-260px] left-2   "
+          )}
+          src={screenshot}
+          alt=""
+        />
+      </div>
     </div>
   );
 };
+
 const Keyboard = () => {
   return (
-    <div className="w-[34rem] h-80 px-12 bg-[#272729] rounded-md flex  flex-col items-center justify-start">
+    <div className="w-[34rem] z-10 h-96 px-12 bg-[#272729] rounded-md flex  flex-col items-center justify-start">
       <div className="bg-black w-full h-8" />
       <div className="w-full bg-[#141414] h-64 flex flex-col gap-[2px] rounded-md mt-6 p-1">
         {/* FIRST ROW  */}
@@ -49,7 +81,7 @@ const Keyboard = () => {
           <Button className="w-[9%] items-end justify-start">Esc</Button>
 
           {functional?.map((btn) => (
-            <Button className=" flex-col items-center justify-center gap-1">
+            <Button className="w-[7%] flex-col items-center justify-center gap-1">
               <img
                 src={btn.icon}
                 alt=""
@@ -64,7 +96,7 @@ const Keyboard = () => {
         {/* SECOND ROW  */}
         <div className="flex w-full gap-[1px]">
           {numberKeys?.map((btn) => (
-            <Button className=" flex-col items-center justify-center">
+            <Button className="w-[7%] flex-col items-center justify-center">
               <div className="text-[7px]">{btn.alternate}</div>
               <div className="text-[6px]">{btn.label}</div>
             </Button>
@@ -76,7 +108,7 @@ const Keyboard = () => {
         <div className="flex w-full gap-[1px]">
           <Button className="w-[9%] items-end justify-start">Tab</Button>
           {qwerty?.map((btn) => (
-            <Button className=" flex-col items-center justify-center">
+            <Button className="w-[7%] flex-col items-center justify-center">
               <div className="text-[7px]">{btn.alternate}</div>
               <div className={btn.alternate ? "text-[6px]" : "text-[8px]"}>
                 {btn.label}
@@ -86,14 +118,14 @@ const Keyboard = () => {
         </div>
         {/* FOURTH ROW  */}
         <div className="flex w-full gap-[1px]">
-          <Button className="w-[13%]  ">
+          <Button className="w-[13%]">
             <div className="relative items-end justify-start flex w-full h-full">
               <div className="w-[2px] h-[2px] bg-white rounded-full absolute top-2 left-1" />
               caps lock
             </div>
           </Button>
           {asdf?.map((btn) => (
-            <Button className=" flex-col items-center justify-center">
+            <Button className="w-[7%] flex-col items-center justify-center">
               <div className="text-[7px]">{btn.alternate}</div>
               <div className={btn.alternate ? "text-[6px]" : "text-[8px]"}>
                 {btn.label}
@@ -107,7 +139,7 @@ const Keyboard = () => {
         <div className="flex w-full gap-[1px]">
           <Button className="w-[15%] items-end justify-start">shift</Button>
           {secondLast?.map((btn) => (
-            <Button className=" flex-col items-center justify-center">
+            <Button className="w-[7%] flex-col items-center justify-center">
               <div className="text-[7px]">{btn.alternate}</div>
               <div className={btn.alternate ? "text-[6px]" : "text-[8px]"}>
                 {btn.label}
@@ -120,7 +152,7 @@ const Keyboard = () => {
         <div className="flex w-full gap-[1px]">
           {/* <Button className="w-[9%] items-end justify-start">Tab</Button> */}
           {lastRow?.map((btn) => (
-            <Button className=" flex-col items-center  justify-end gap-1">
+            <Button className="w-[7%] flex-col items-center  justify-end gap-1">
               {/* <div className="text-[7px]">{btn.alternate}</div> */}
               <img
                 src={btn.icon}
@@ -141,28 +173,28 @@ const Keyboard = () => {
             <img src={command} alt="" className="invert filter grayscale w-2" />
             <div className={"text-[6px]"}>command</div>
           </Button>
-          <div className="w-[26%]  ">
+          <div className="w-[26%]">
             <div className="w-full flex justify-center">
-              <Button className=" flex-col w-[25%] h-3 items-center justify-center">
+              <Button className=" flex-col w-[25%] !h-4 items-center justify-center">
                 <img src={top} alt="" className="invert filter grayscale w-2" />
               </Button>
             </div>
             <div className="w-full flex  justify-center mt-[1px] gap-[2px]">
-              <Button className=" flex-col w-[25%] h-3 items-center justify-center">
+              <Button className=" flex-col w-[25%] !h-4 items-center justify-center">
                 <img
                   src={left}
                   alt=""
                   className="invert filter grayscale w-2"
                 />
               </Button>
-              <Button className=" flex-col w-[25%] h-3 items-center justify-center">
+              <Button className=" flex-col w-[25%] !h-4 items-center justify-center">
                 <img
                   src={down}
                   alt=""
                   className="invert filter grayscale w-2"
                 />
               </Button>
-              <Button className=" flex-col w-[25%] h-3 items-center justify-center">
+              <Button className=" flex-col w-[25%] !h-4 items-center justify-center">
                 <img
                   src={right}
                   alt=""
