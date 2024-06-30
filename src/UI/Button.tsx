@@ -12,7 +12,7 @@ const Button = ({
     <button
       className={clsx(
         className,
-        " bg-black h-8  text-[6px] p-[2px] flex capitalize active:scale-95  shadow-[0_10px_20px_rgba(205,205,205,_0.7)] rounded-[4px]"
+        " bg-black lg:h-8 h-5  text-[6px] p-[2px] flex capitalize active:scale-95  shadow-[0_10px_20px_rgba(205,205,205,_0.7)] rounded-[4px]"
       )}
     >
       {children}

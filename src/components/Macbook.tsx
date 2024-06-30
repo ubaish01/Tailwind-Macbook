@@ -14,30 +14,40 @@ import right from "../assets/keys/right.svg";
 import down from "../assets/keys/down.svg";
 import command from "../assets/keys/command.svg";
 import screenshot from "../assets/images/macbook.png";
-import { useEffect, useRef, useState } from "react";
+import github from "../assets/images/github.png";
+import { useEffect, useRef } from "react";
 import clsx from "clsx";
 
 const Macbook = () => {
   return (
     <div className="w-[38rem] flex flex-col items-center">
-      <Screen />
-      <Keyboard />
+      <div className="w-[38rem]  flex items-center justify-center">
+        <Screen />
+      </div>
+      <div className="w-[34rem] flex items-center justify-center">
+        <Keyboard />
+      </div>
+      <Repo />
     </div>
   );
 };
 
 const Screen = () => {
-  const screenshotRef = useRef(null);
+  const screenshotRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       const screenHeight = window.innerHeight;
       const moveDown = Math.min(scrollPosition, screenHeight);
+      const xt = Math.ceil(moveDown / 19) - 35;
 
       if (screenshotRef.current) {
         if (scrollPosition > 0) {
-          screenshotRef.current.style.transform = `translateY(${moveDown}px) rotateX(0deg)`;
+          screenshotRef.current.style.transform = `translateY(${moveDown}px) rotateX(${xt}deg)`;
+          screenshotRef.current.style.scale = `${
+            100 + Math.ceil(moveDown / 10)
+          }%`;
         } else {
           screenshotRef.current.style.transform =
             "translateY(0) rotateX(-35deg)";
@@ -52,8 +62,8 @@ const Screen = () => {
   }, []);
 
   return (
-    <div className="w-full z-20">
-      <div className="outer-screen w-full h-80 mb-[-38px]">
+    <div className="lg:w-full md:3/4 w-1/2 z-20">
+      <div className="outer-screen w-full lg:h-80 h-48 mb-[-38px]">
         <div className=" screen  bg-black border-4 overflow-hidden border-b-0 rounded-xl border-[#171717]"></div>
       </div>
 
@@ -61,7 +71,7 @@ const Screen = () => {
         <img
           ref={screenshotRef}
           className={clsx(
-            "w-[37rem] z-50 ss aspect-auto h-72 absolute top-[-260px] left-2   "
+            "lg:w-[37rem] w-[18rem] z-50 ss aspect-auto lg:h-72 h-48  absolute lg:top-[-260px] top-[-145px] left-2   "
           )}
           src={screenshot}
           alt=""
@@ -73,7 +83,7 @@ const Screen = () => {
 
 const Keyboard = () => {
   return (
-    <div className="w-[34rem] z-10 h-96 px-12 bg-[#272729] rounded-md flex  flex-col items-center justify-start">
+    <div className="lg:w-full md:3/4 w-1/2 z-10 h-96 px-12 bg-[#272729] rounded-md flex  flex-col items-center justify-start">
       <div className="bg-black w-full h-8" />
       <div className="w-full bg-[#141414] h-64 flex flex-col gap-[2px] rounded-md mt-6 p-1">
         {/* FIRST ROW  */}
@@ -97,7 +107,7 @@ const Keyboard = () => {
         <div className="flex w-full gap-[1px]">
           {numberKeys?.map((btn) => (
             <Button className="w-[7%] flex-col items-center justify-center">
-              <div className="text-[7px]">{btn.alternate}</div>
+              <div className="lg:text-[7px] text-[5px]">{btn.alternate}</div>
               <div className="text-[6px]">{btn.label}</div>
             </Button>
           ))}
@@ -109,7 +119,7 @@ const Keyboard = () => {
           <Button className="w-[9%] items-end justify-start">Tab</Button>
           {qwerty?.map((btn) => (
             <Button className="w-[7%] flex-col items-center justify-center">
-              <div className="text-[7px]">{btn.alternate}</div>
+              <div className="lg:text-[7px] text-[5px]">{btn.alternate}</div>
               <div className={btn.alternate ? "text-[6px]" : "text-[8px]"}>
                 {btn.label}
               </div>
@@ -126,7 +136,7 @@ const Keyboard = () => {
           </Button>
           {asdf?.map((btn) => (
             <Button className="w-[7%] flex-col items-center justify-center">
-              <div className="text-[7px]">{btn.alternate}</div>
+              <div className="lg:text-[7px] text-[5px]">{btn.alternate}</div>
               <div className={btn.alternate ? "text-[6px]" : "text-[8px]"}>
                 {btn.label}
               </div>
@@ -140,7 +150,7 @@ const Keyboard = () => {
           <Button className="w-[15%] items-end justify-start">shift</Button>
           {secondLast?.map((btn) => (
             <Button className="w-[7%] flex-col items-center justify-center">
-              <div className="text-[7px]">{btn.alternate}</div>
+              <div className="lg:text-[7px] text-[5px]">{btn.alternate}</div>
               <div className={btn.alternate ? "text-[6px]" : "text-[8px]"}>
                 {btn.label}
               </div>
@@ -153,7 +163,7 @@ const Keyboard = () => {
           {/* <Button className="w-[9%] items-end justify-start">Tab</Button> */}
           {lastRow?.map((btn) => (
             <Button className="w-[7%] flex-col items-center  justify-end gap-1">
-              {/* <div className="text-[7px]">{btn.alternate}</div> */}
+              {/* <div className="lg:text-[7px] text-[5px]">{btn.alternate}</div> */}
               <img
                 src={btn.icon}
                 alt=""
@@ -207,6 +217,28 @@ const Keyboard = () => {
       </div>
       <div className="w-60 items-center  justify-center border border-gray-900 h-48 rounded-md "></div>
       <div className="h-4"></div>
+    </div>
+  );
+};
+
+const Repo = () => {
+  return (
+    <div className="flex flex-col items-center justify-start mt-2">
+      <div>
+        Made with ❤️ by{" "}
+        <span className="text-purple-500 cursor-pointer hover:underline ">
+          Ubaish Malik
+        </span>{" "}
+      </div>
+      <div className="mt-60 text-3xl text-center font-bold">
+        <div className="">
+          Do you like it ? Checkout the code{" "}
+          <span className="text-purple-500 hover:underline cursor-pointer">
+            here
+          </span>
+        </div>
+        <div>Dont forget to give it a star.</div>
+      </div>
     </div>
   );
 };
