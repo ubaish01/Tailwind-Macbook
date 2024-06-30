@@ -12,7 +12,6 @@ import mute from "./assets/keys/mute.svg";
 import fn from "./assets/keys/globe.svg";
 import control from "./assets/keys/collapse.svg";
 import option from "./assets/keys/options.svg";
-import command from "./assets/keys/command.svg";
 
 export const functional = [
   {

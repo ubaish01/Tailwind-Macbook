@@ -13,6 +13,7 @@ import top from "../assets/keys/top.svg";
 import right from "../assets/keys/right.svg";
 import down from "../assets/keys/down.svg";
 import command from "../assets/keys/command.svg";
+import power from "../assets/keys/power.svg";
 import screenshot from "../assets/images/macbook.png";
 import github from "../assets/images/github.png";
 import { useEffect, useRef } from "react";
@@ -53,6 +54,8 @@ const Screen = () => {
             "translateY(0) rotateX(-35deg)";
         }
       }
+      if (screenshotRef?.current)
+        screenshotRef.current.src = moveDown > 500 ? github : screenshot;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -71,7 +74,7 @@ const Screen = () => {
         <img
           ref={screenshotRef}
           className={clsx(
-            "lg:w-[37rem] w-[18rem] z-50 ss aspect-auto lg:h-72 h-48  absolute lg:top-[-260px] top-[-145px] left-2   "
+            "lg:w-[37rem] w-[18rem] z-50 ss aspect-auto lg:h-72 h-48 rounded-md  absolute lg:top-[-260px] top-[-145px] left-2   "
           )}
           src={screenshot}
           alt=""
@@ -100,7 +103,9 @@ const Keyboard = () => {
               {btn.label}
             </Button>
           ))}
-          <Button className="w-[7%] items-end justify-start"></Button>
+          <Button className="w-[7%] items-center justify-center">
+            <img src={power} alt="" className="invert filter grayscale w-2" />
+          </Button>
         </div>
 
         {/* SECOND ROW  */}
