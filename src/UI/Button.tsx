@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React from "react";
-
+import clickSound from "../assets/audio/button-click.mp3";
 const Button = ({
   children,
   className = "",
@@ -8,11 +8,17 @@ const Button = ({
   children?: React.ReactNode;
   className?: string;
 }) => {
+  const PlayClickSound = () => {
+    const audio = new Audio(clickSound);
+    audio.play();
+  };
+
   return (
     <button
+      onClick={PlayClickSound}
       className={clsx(
         className,
-        " bg-black lg:h-8 h-5  text-[6px] p-[2px] flex capitalize active:scale-95  shadow-[0_10px_20px_rgba(205,205,205,_0.5)] rounded-[4px]"
+        " bg-black h-8   text-[6px] p-[2px] flex capitalize active:scale-95  shadow-[0_10px_20px_rgba(205,205,205,_0.5)] rounded-[4px]"
       )}
     >
       {children}

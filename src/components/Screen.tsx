@@ -23,9 +23,6 @@ const Screen = () => {
             "translateY(0) rotateX(-35deg)";
         }
       }
-      if (screenshotRef?.current)
-        // screenshotRef.current.src = moveDown > 500 ? github : screenshot;
-        screenshotRef.current.src = wallpaper;
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -35,8 +32,8 @@ const Screen = () => {
   }, []);
 
   return (
-    <div className="lg:w-full md:3/4 w-1/2 z-20">
-      <div className="outer-screen w-full lg:h-80 h-48 mb-[-38px]">
+    <div className="w-full  z-20">
+      <div className="outer-screen w-full h-80 mb-[-38px]">
         <div className=" screen  bg-black border-4 overflow-hidden border-b-0 rounded-xl border-[#171717]"></div>
       </div>
 
@@ -44,7 +41,7 @@ const Screen = () => {
         <img
           ref={screenshotRef}
           className={clsx(
-            "lg:w-[37rem] w-[18rem] z-50 ss aspect-auto lg:h-72 h-48 rounded-md  absolute lg:top-[-264px] top-[-145px] left-2   "
+            "w-[37rem]  z-50 ss aspect-auto h-72  rounded-md  absolute top-[-264px]  left-2   "
           )}
           src={wallpaper}
           alt=""

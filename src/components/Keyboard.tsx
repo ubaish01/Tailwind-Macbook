@@ -17,7 +17,7 @@ import power from "../assets/keys/power.svg";
 
 const Keyboard = () => {
   return (
-    <div className="lg:w-full md:3/4 w-1/2 z-10 h-96 px-12 bg-[#272729] rounded-md flex  flex-col items-center justify-start">
+    <div className="w-full  z-10 h-96 px-12 bg-[#272729] rounded-md flex  flex-col items-center justify-start">
       <div className="bg-black w-full h-8" />
       <div className="w-full bg-[#141414] h-64 flex flex-col gap-[2px] rounded-md mt-6 p-1">
         {/* FIRST ROW  */}
@@ -43,7 +43,7 @@ const Keyboard = () => {
         <div className="flex w-full gap-[1px]">
           {numberKeys?.map((btn) => (
             <Button className="w-[7%] flex-col items-center justify-center">
-              <div className="lg:text-[7px] text-[5px]">{btn.alternate}</div>
+              <div className="text-[7px] ">{btn.alternate}</div>
               <div className="text-[6px]">{btn.label}</div>
             </Button>
           ))}
@@ -55,7 +55,7 @@ const Keyboard = () => {
           <Button className="w-[9%] items-end justify-start">Tab</Button>
           {qwerty?.map((btn) => (
             <Button className="w-[7%] flex-col items-center justify-center">
-              <div className="lg:text-[7px] text-[5px]">{btn.alternate}</div>
+              <div className="text-[7px] ">{btn.alternate}</div>
               <div className={btn.alternate ? "text-[6px]" : "text-[8px]"}>
                 {btn.label}
               </div>
@@ -72,7 +72,7 @@ const Keyboard = () => {
           </Button>
           {asdf?.map((btn) => (
             <Button className="w-[7%] flex-col items-center justify-center">
-              <div className="lg:text-[7px] text-[5px]">{btn.alternate}</div>
+              <div className="text-[7px] ">{btn.alternate}</div>
               <div className={btn.alternate ? "text-[6px]" : "text-[8px]"}>
                 {btn.label}
               </div>
@@ -86,7 +86,7 @@ const Keyboard = () => {
           <Button className="w-[15%] items-end justify-start">shift</Button>
           {secondLast?.map((btn) => (
             <Button className="w-[7%] flex-col items-center justify-center">
-              <div className="lg:text-[7px] text-[5px]">{btn.alternate}</div>
+              <div className="text-[7px] ">{btn.alternate}</div>
               <div className={btn.alternate ? "text-[6px]" : "text-[8px]"}>
                 {btn.label}
               </div>
